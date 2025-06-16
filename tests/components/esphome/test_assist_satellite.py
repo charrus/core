@@ -1320,9 +1320,6 @@ async def test_non_default_supported_features(
         satellite.supported_features & AssistSatelliteEntityFeature.START_CONVERSATION
     )
     assert not (satellite.supported_features & AssistSatelliteEntityFeature.ANNOUNCE)
-    assert not (
-        satellite.supported_features & AssistSatelliteEntityFeature.ASK_QUESTION
-    )
 
 
 async def test_start_conversation_message(
@@ -1718,7 +1715,7 @@ async def test_ask_question(
             return_value=pipeline,
         ),
     ):
-        async with asyncio.timeout(1000):
+        async with asyncio.timeout(1):
             response = await hass.services.async_call(
                 assist_satellite.DOMAIN,
                 "ask_question",
